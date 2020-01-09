@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AIKI.CO.Diafaan.Helper
 {
-    public class RestCommand
+    public class DiafaanRestCommand
     {
         public static string SendMessage => "send-message";
         public static string RemoveQueuedMessage => "remove-queued-message";

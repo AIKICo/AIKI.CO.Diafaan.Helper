@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AIKI.CO.Diafaan.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,25 @@ namespace AIKI.CO.Diafaan.TestUI
 {
     public partial class frmMain : Form
     {
+        private readonly SMSSeverCommand SMSHelper;
+        private string[] stringSeparators = new string[] { "\r\n" };
         public frmMain()
         {
             InitializeComponent();
+            SMSServerSettings.ServerName = "Mehrnia-MSI";
+            SMSServerSettings.Port = 9710;
+            SMSServerSettings.Password = "kabinet95";
+            SMSHelper = new SMSSeverCommand();
+        }
+
+        private async void btnSendMessage_Click(object sender, EventArgs e)
+        {
+            btnSendMessage.Enabled = false;
+            var response = await SMSHelper.SendMessage("+989163085306", "Send From My Own Library");
+            MessageBox.Show($"تعداد {response.Content.Split(stringSeparators, StringSplitOptions.None).Count()} پیام ارسال شد");
+
+            btnSendMessage.Enabled = true;
+
         }
     }
 }
